@@ -1,0 +1,14 @@
+---
+# tasks file for base-installations
+- name: install {{ item }} 
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - vim-enhanced
+    - libselinux-python #required for playbooks(python) to handle selinux contexts
+    - gnome-tweaks
+- name: setup vim configuration
+  copy:
+    src: .vimrc
+    dest: "{{ ansible_user_dir }}/.vimrc"
