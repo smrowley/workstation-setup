@@ -1,13 +1,32 @@
 ---
 # tasks file for base-installations
+- name: get rpm fedora version
+  command: rpm -E %fedora
+  args:
+    warn: False
+  register: rpm_stats
+- name: install rpmfusion for codecs
+  dnf:
+    name: https://download1.rpmfusion.org/{{ item }}-release-{{ rpm_stats.stdout }}.noarch.rpm
+    state: latest
+  loop:
+  - free/fedora/rpmfusion-free
+  - nonfree/fedora/rpmfusion-nonfree
+- name: install {{ item }} for codecs
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop:
+  - ffmpeg-libs
+  - compat-ffmpeg28
 - name: install {{ item }} 
   dnf:
     name: "{{ item }}"
     state: latest
   loop:
-    - vim-enhanced
-    - libselinux-python #required for playbooks(python) to handle selinux contexts
-    - gnome-tweaks
+  - vim-enhanced
+  - libselinux-python #required for playbooks(python) to handle selinux contexts
+  - gnome-tweaks
 - name: setup vim configuration
   copy:
     src: .vimrc
