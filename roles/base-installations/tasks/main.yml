@@ -4,6 +4,7 @@
   command: rpm -E %fedora
   args:
     warn: False
+  changed_when: False
   register: rpm_stats
 - name: install rpmfusion for codecs
   dnf:
