@@ -1,7 +1,10 @@
 ---
 - hosts: localhost
-  become: true
+  become: True
   roles:
   - base-installations
+
+- hosts: localhost
+  roles:
   - environment
   - gnome-configuration

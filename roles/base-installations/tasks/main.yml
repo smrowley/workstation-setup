@@ -27,7 +27,7 @@
   loop:
   - vim-enhanced
   - libselinux-python #required for playbooks(python) to handle selinux contexts
-  - gnome-tweaks
+  - python2-psutil #required for playbooks to make dconf changes
 - name: setup vim configuration
   copy:
     src: .vimrc

@@ -1,2 +1,12 @@
 ---
 # tasks file for roles/gnome-configuration
+- name: install gnome tweaks
+  dnf:
+    name: gnome-tweaks
+    state: latest
+  become: True
+- name: turn off natural scrolling
+  include_tasks: natural-scrolling.yml
+  loop:
+  - touchpad
+  - mouse

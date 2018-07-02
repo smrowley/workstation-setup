@@ -1,0 +1,11 @@
+---
+# tasks file for roles/gnome-configuration
+- dconf:
+    key: /org/gnome/desktop/peripherals/{{ item }}/natural-scroll
+    state: read
+  register: result
+- dconf:
+    key: /org/gnome/desktop/peripherals/{{ item }}/natural-scroll
+    value: "false"
+    state: present
+  when: result.value != "false"
