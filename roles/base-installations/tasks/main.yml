@@ -28,7 +28,13 @@
   - vim-enhanced
   - libselinux-python #required for playbooks(python) to handle selinux contexts
   - python2-psutil #required for playbooks to make dconf changes
+  - python2-requests
 - name: setup vim configuration
   copy:
     src: .vimrc
     dest: "{{ ansible_user_dir }}/.vimrc"
+- name: add git branch to PS1
+  lineinfile:
+    path: /home/{{ user_name }}/.bashrc
+    line: export PS1="[\e[0;36m\u\e[m\e[0;35m@\h\e[m \W\e[0;33m\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')\e[m]\$ "
+    regexp: export PS1=
