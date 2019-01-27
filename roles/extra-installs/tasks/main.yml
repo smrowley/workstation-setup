@@ -24,3 +24,22 @@
     name: "{{ user_name }}"
     groups: docker
     append: true
+
+- name: install cfssl tools
+  get_url:
+    url: https://pkg.cfssl.org/R{{ cfssl_version }}/{{ item }}_linux-amd64
+    dest: /usr/local/bin/{{ item }}
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+  - cfssl
+  - cfssljson
+
+- name: install kubectl
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    owner: root
+    group: root
+    mode: 0755

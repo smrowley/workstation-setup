@@ -1,2 +1,5 @@
 ---
 # vars file for extra-installs
+
+cfssl_version: 1.2
+kubectl_version: 1.12.0
