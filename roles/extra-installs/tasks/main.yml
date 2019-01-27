@@ -1,24 +1,26 @@
 ---
 # tasks file for extra-installs
-- name: install extra stuff
+- name: install dev tools
   dnf:
     name: "{{ item }}"
     state: latest
   loop:
   - npm
-  - docker
   - git
+
+- name: docker
+  dnf:
+    name: docker
+    state: latest
+  notify: restart docker daemon
+
 - name: add docker group
   group:
     name: docker
     state: present
+
 - name: add {{ user_name }} to docker group
   user:
     name: "{{ user_name }}"
     groups: docker
     append: true
-- name: restart docker daemon
-  service:
-    name: docker
-    state: restarted
-    enabled: true

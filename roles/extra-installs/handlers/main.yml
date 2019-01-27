@@ -1,2 +1,7 @@
 ---
 # handlers file for extra-installs
+- name: restart docker daemon
+  service:
+    name: docker
+    state: restarted
+    enabled: true
