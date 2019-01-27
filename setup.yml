@@ -1,8 +1,14 @@
 ---
 - hosts: localhost
   become: True
+  vars:
+    user_name: shane
   roles:
   - base-installations
+  - atom-installation
+  - vscode-installation
+  - extra-installs
+  - google-cloud-sdk-installation
 
 - hosts: localhost
   roles:
