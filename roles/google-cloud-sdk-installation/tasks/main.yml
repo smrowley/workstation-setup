@@ -1,0 +1,18 @@
+---
+# tasks file for google-cloud-sdk-installation
+- name: Add repository for google cloud sdk
+  yum_repository:
+    name: google-cloud-sdk
+    description: Google Cloud SDK
+    baseurl: https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-x86_64
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
+    gpgkey:
+    - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+    - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: install google-cloud-sdk
+  dnf:
+    name: google-cloud-sdk
+    state: latest
